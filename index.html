@@ -1,65 +1,466 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram Signals VN</title>
+  <meta name="description" content="Join the exclusive Telegram channel for live Chicken Road signals. Limited access only.">
+  <title>Chicken Road Insider | Private Access</title>
+  
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: #0d0e12;
+      color: #f9fafb;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(52, 211, 153, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(52, 211, 153, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    .gradient-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(52, 211, 153, 0.15), transparent 70%);
+      z-index: 0;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      padding: 5rem 1.5rem;
+    }
+
+    .hero-content {
+      max-width: 48rem;
+      margin: 0 auto;
       text-align: center;
     }
-    .container {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 90%;
+
+    /* Top badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background: rgba(52, 211, 153, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
     }
+
+    .badge-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #34d399;
+    }
+
+    .badge-text {
+      font-size: 0.875rem;
+      font-family: 'Courier New', monospace;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* Main headline */
     .headline {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
     }
-    .subtext {
-      font-size: 1rem;
-      margin-bottom: 25px;
-      color: #333;
+
+    .headline h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
-    .phone-img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 25px;
+
+    .headline-accent {
+      color: #34d399;
+      text-shadow: 0 0 20px rgba(52, 211, 153, 0.5), 0 0 40px rgba(52, 211, 153, 0.3);
     }
-    .tg-button {
+
+    .subheadline {
+      font-size: 1.25rem;
+      color: #9ca3af;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+    }
+
+    /* Terminal box */
+    .terminal {
+      margin: 3rem auto;
+      max-width: 28rem;
+      background: rgba(15, 16, 20, 0.8);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 0 30px rgba(52, 211, 153, 0.2), inset 0 0 20px rgba(52, 211, 153, 0.05);
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(52, 211, 153, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .terminal-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-green { background: #34d399; }
+    .dot-yellow { background: #fbbf24; }
+
+    .terminal-content {
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: #34d399;
+    }
+
+    .terminal-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* Urgency element */
+    .urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      backdrop-filter: blur(10px);
+      margin: 2rem 0;
+    }
+
+    .pulse-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .urgency-text {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #fca5a5;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* CTA Button */
+    .cta-button {
       display: inline-block;
-      padding: 15px 25px;
-      background-color: #0088cc;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 12px;
+      margin-top: 1rem;
+      padding: 1.75rem 3rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #0d0e12;
+      background: #34d399;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
       text-decoration: none;
-      transition: background 0.3s;
+      box-shadow: 0 0 30px rgba(52, 211, 153, 0.4), 0 10px 40px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
     }
-    .tg-button:hover {
-      background-color: #006699;
+
+    .cta-button:hover {
+      background: #2cb87e;
+      transform: scale(1.05);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .chevron-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #6b7280;
+    }
+
+    /* Features section */
+    .features {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 1.5rem;
+      border-top: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .features-container {
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 0.5rem;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(52, 211, 153, 0.5);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(52, 211, 153, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #34d399;
+    }
+
+    .feature-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      font-size: 0.875rem;
+      color: #9ca3af;
+    }
+
+    .features-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* Responsive design */
+    @media (min-width: 640px) {
+      .headline h1 {
+        font-size: 4rem;
+      }
+      .subheadline {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .headline h1 {
+        font-size: 5rem;
+      }
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="headline">Chỉ cần 2 điện thoại</div>
-    <div class="subtext">Xem tín hiệu ngay — không cần VPN</div>
-    <img class="phone-img" src="phones.jpg" alt="Два телефона с сигналами и игрой">
-    <a class="tg-button" href="https://t.me/your_channel" target="_blank">Vào Telegram</a>
+    <!-- Animated grid background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+
+    <!-- Hero Section -->
+    <main class="hero">
+      <div class="hero-content">
+        <!-- Top badge -->
+        <div class="badge">
+          <svg class="badge-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span class="badge-text">Private Access</span>
+        </div>
+
+        <!-- Main headline -->
+        <div class="headline">
+          <h1>
+            <div>CHICKEN ROAD</div>
+            <div class="headline-accent">INSIDER</div>
+          </h1>
+          <p class="subheadline">Live signals. Limited access.</p>
+        </div>
+
+        <!-- Terminal-style visual -->
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-dot dot-red"></div>
+            <div class="terminal-dot dot-green"></div>
+            <div class="terminal-dot dot-yellow"></div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-line">
+              <svg class="terminal-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <span>Real-time predictions</span>
+            </div>
+            <div class="terminal-line">
+              <svg class="terminal-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span>Exclusive strategies</span>
+            </div>
+            <div class="terminal-line">
+              <svg class="terminal-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              <span>Private community</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Urgency element -->
+        <div class="urgency">
+          <div class="pulse-dot"></div>
+          <span class="urgency-text">Only 18 spots available</span>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="https://t.me/yourchannel" class="cta-button" target="_blank" rel="noopener noreferrer">
+          Get Access
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator">
+        <svg class="chevron-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+    </main>
+
+    <!-- Features section -->
+    <section class="features">
+      <div class="features-container">
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Instant Signals</h3>
+            <p class="feature-desc">Get notifications before the game starts</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Private Group</h3>
+            <p class="feature-desc">Join exclusive Telegram community</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Limited Slots</h3>
+            <p class="feature-desc">Only serious players allowed</p>
+          </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="features-cta">
+          <a href="https://t.me/yourchannel" class="cta-button" target="_blank" rel="noopener noreferrer">
+            Enter Telegram
+          </a>
+        </div>
+      </div>
+    </section>
   </div>
 </body>
 </html>
